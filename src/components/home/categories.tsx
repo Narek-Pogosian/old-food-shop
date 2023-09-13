@@ -4,7 +4,7 @@ import Link from "next/link";
 const Categories = () => {
   return (
     <div>
-      <h2 className="mb-10 text-4xl font-semibold text-center">
+      <h2 className="mb-10 text-2xl font-semibold text-center md:text-4xl">
         Shop by category
       </h2>
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -12,6 +12,7 @@ const Categories = () => {
           <Link
             href={`/shop?category=${category.category}`}
             className="flex justify-center"
+            key={category.category}
           >
             <li
               key={category.category}
