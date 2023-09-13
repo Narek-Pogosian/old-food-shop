@@ -25,11 +25,19 @@ const ProductsList = async ({ searchParams }: Props) => {
     skip: page ? (Number(page) - 1) * PAGE_LIMIT : 0,
   });
 
+  if (products.length === 0) {
+    return (
+      <div className="flex flex-col items-center gap-10 pt-24">
+        <h2 className="text-3xl font-semibold">No products found!</h2>
+      </div>
+    );
+  }
+
   return (
     <>
       <ListGrid>
         {products.map((product) => (
-          <ProductCard product={product} />
+          <ProductCard product={product} key={product.id} />
         ))}
       </ListGrid>
       <Pagination

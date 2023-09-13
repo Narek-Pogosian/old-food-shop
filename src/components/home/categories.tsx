@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Categories = () => {
   return (
-    <div className="pt-24 pb-12 ">
-      <h2 className="mb-10 text-2xl font-semibold text-center">
+    <div>
+      <h2 className="mb-10 text-4xl font-semibold text-center">
         Shop by category
       </h2>
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -16,7 +16,7 @@ const Categories = () => {
             <li
               key={category.category}
               style={{ backgroundImage: `url(${category.image})` }}
-              className={`h-[400px] bg-cover bg-blend-multiply bg-gray-500 rounded p-6 w-[300px] flex items-center justify-center 
+              className={`sm:h-[400px] h-[350px] bg-cover bg-blend-multiply bg-gray-500 rounded p-6 w-[260px] xs:w-[300px] flex items-center justify-center 
                 hover:bg-gray-600 transition-colors
               `}
             >
