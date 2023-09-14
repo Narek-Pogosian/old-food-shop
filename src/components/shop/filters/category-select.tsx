@@ -1,5 +1,6 @@
 "use client";
 
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -21,26 +22,36 @@ const CategorySelect = ({ initalValue }: Props) => {
   const router = useRouter();
 
   return (
-    <Select
-      defaultValue={initalValue}
-      onValueChange={(value: Category) => {
-        router.push(setCategoryQuery(value));
-      }}
-    >
-      <SelectTrigger className="xs:w-[180px]">
-        <SelectValue placeholder="Filter by category" className="capitalize" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectItem value="">All</SelectItem>
-          {categoryOptions.map((category) => (
-            <SelectItem value={category} className="capitalize" key={category}>
-              {category}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className="space-y-1">
+      <Label>Category</Label>
+      <Select
+        defaultValue={initalValue}
+        onValueChange={(value: Category) => {
+          router.push(setCategoryQuery(value));
+        }}
+      >
+        <SelectTrigger className="xs:w-[180px]">
+          <SelectValue
+            placeholder="Filter by category"
+            className="capitalize"
+          />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value="">All</SelectItem>
+            {categoryOptions.map((category) => (
+              <SelectItem
+                value={category}
+                className="capitalize"
+                key={category}
+              >
+                {category}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
 

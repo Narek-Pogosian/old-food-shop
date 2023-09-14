@@ -14,15 +14,10 @@ import CartQuantityBadge from "./cart-quantity-badge";
 import { ScrollArea } from "../ui/scroll-area";
 import { getTotalPrice } from "@/lib/utils";
 import CartItemCard from "./cart-item";
-import { useEffect, useState } from "react";
+import useIsMounted from "@/hooks/use-is-mounted";
 
 const CartDrawer = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
+  const isMounted = useIsMounted();
   const { cartItems } = useCartContext();
 
   return (
@@ -32,7 +27,7 @@ const CartDrawer = () => {
           <span className="sr-only">Open shopping cart</span>
           <ShoppingCart />
           {/* Fixes hydration warning */}
-          {isClient && cartItems.length > 0 && (
+          {isMounted && cartItems.length > 0 && (
             <CartQuantityBadge quantity={cartItems.length} />
           )}
         </Button>
@@ -53,7 +48,9 @@ const CartDrawer = () => {
           <p className="mb-4 text-lg font-semibold">
             Total Price: {getTotalPrice(cartItems)}
           </p>
-          <Button className="w-full">Checkout</Button>
+          <Button className="w-full text-base font-semibold tracking-wider">
+            Checkout
+          </Button>
         </div>
       </SheetContent>
     </Sheet>

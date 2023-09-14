@@ -1,5 +1,6 @@
 "use client";
 
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -26,33 +27,34 @@ const SortingSelect = ({ initalValue }: Props) => {
   const defaultValue =
     initalValue.dir && initalValue.orderBy ? JSON.stringify(initalValue) : "";
 
-  console.log(defaultValue);
-
   return (
-    <Select
-      defaultValue={defaultValue}
-      onValueChange={(value) => {
-        router.push(setSortQuery(value ? JSON.parse(value) : ""));
-      }}
-    >
-      <SelectTrigger className="xs:w-[180px]">
-        <SelectValue placeholder="Sort by" className="capitalize" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {sortOptions.map((option) => (
-            <SelectItem
-              // Makes sure Release Ascending has "" as value
-              value={option.value ? JSON.stringify(option.value) : ""}
-              className="capitalize"
-              key={JSON.stringify(option.label)}
-            >
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className="space-y-1">
+      <Label>Sort Options</Label>
+      <Select
+        defaultValue={defaultValue}
+        onValueChange={(value) => {
+          router.push(setSortQuery(value ? JSON.parse(value) : ""));
+        }}
+      >
+        <SelectTrigger className="xs:w-[180px]">
+          <SelectValue placeholder="Sort by" className="capitalize" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {sortOptions.map((option) => (
+              <SelectItem
+                // Makes sure Release Ascending has "" as value
+                value={option.value ? JSON.stringify(option.value) : ""}
+                className="capitalize"
+                key={JSON.stringify(option.label)}
+              >
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import AddToCartCounter from "@/components/details/add-to-cart-counter";
 import ProductInfo from "@/components/details/product-info";
+import ReviewList from "@/components/details/reviews-list";
 import PageTitle from "@/components/page-title";
 import { db } from "@/lib/db";
 import Image from "next/image";
@@ -12,8 +13,13 @@ export async function generateStaticParams() {
   }));
 }
 
+// export const revalidate = 10000;
+
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
-  const product = await db.product.findFirst({ where: { id: params.id } });
+  const product = await db.product.findFirst({
+    where: { id: params.id },
+    include: { reviews: true },
+  });
 
   if (!product) {
     throw Error;
@@ -22,20 +28,28 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
   return (
     <div className="container">
       <PageTitle>Product Details</PageTitle>
-      <div className="grid gap-10 lg:grid-cols-2">
+      <section className="grid gap-10 lg:grid-cols-2">
         <div className="lg:order-2">
           <ProductInfo product={product} />
           <AddToCartCounter product={product} />
         </div>
-        <div className="relative aspect-[16/11] lg:max-w-none lg:mx-0">
+        <div className="sm:p-8 lg:p-0 relative aspect-[16/11]">
           <Image
             src={product.imgUrl}
             alt={product.name}
             className="rounded"
             fill
+            sizes="(max-width: 1024px) 50%"
           />
         </div>
-      </div>
+      </section>
+      {/* Reviews */}
+      <section className="pt-16">
+        <h2 className="text-2xl font-semibold text-center">
+          Our Customers Opinion
+        </h2>
+        <ReviewList reviews={product.reviews} />
+      </section>
     </div>
   );
 };
