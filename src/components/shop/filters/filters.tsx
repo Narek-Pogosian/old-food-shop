@@ -1,7 +1,7 @@
 "use client";
 
 import CategorySelect from "./category-select";
-import { SearchParamsSchemaType } from "@/lib/validations/searchParams-validation";
+import { SearchParamsSchemaType } from "@/lib/validations/search-params-validation";
 import SortingSelect from "./sorting-select";
 
 const Filters = ({

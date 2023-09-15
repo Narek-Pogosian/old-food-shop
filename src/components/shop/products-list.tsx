@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import ProductCard from "./product-card";
 import ListGrid from "./list-grid";
-import { SearchParamsSchemaType } from "@/lib/validations/searchParams-validation";
+import { SearchParamsSchemaType } from "@/lib/validations/search-params-validation";
 import Pagination from "./pagination";
 
 type Props = {

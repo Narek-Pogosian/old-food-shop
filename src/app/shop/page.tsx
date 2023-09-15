@@ -5,7 +5,7 @@ import SkeletonList from "@/components/shop/skeleton-list";
 import {
   SearchParamsSchemaType,
   searchParamsSchema,
-} from "@/lib/validations/searchParams-validation";
+} from "@/lib/validations/search-params-validation";
 import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";

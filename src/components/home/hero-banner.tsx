@@ -9,8 +9,7 @@ const HeroBanner = () => {
           Collection is here
         </h1>
         <p className="text-white md:text-xl">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-          porro est eum ad rerum iste tempora, ullam itaque voluptas laboriosam.
+          TODO: Find better image and catchphrase
         </p>
         <Button variant="white" asChild size="lg">
           <Link href="/shop">Start Shopping</Link>
