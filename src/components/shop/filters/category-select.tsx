@@ -36,7 +36,13 @@ const CategorySelect = ({ initalValue }: Props) => {
             className="capitalize"
           />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          // Fixes bubbling issue on mobile device
+          ref={(ref) => {
+            if (!ref) return;
+            ref.ontouchstart = (e) => e.preventDefault();
+          }}
+        >
           <SelectGroup>
             <SelectItem value="">All</SelectItem>
             {categoryOptions.map((category) => (

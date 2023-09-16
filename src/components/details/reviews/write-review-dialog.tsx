@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { useForm } from "react-hook-form";
 import {
   ReviewSchemaType,
@@ -21,9 +21,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+} from "../../ui/form";
+import { Input } from "../../ui/input";
+import { Textarea } from "../../ui/textarea";
 import { useState } from "react";
 
 type Props = {
@@ -49,14 +49,18 @@ const WriteReviewDialog = ({ productId }: Props) => {
   });
 
   const onSubmit = async (data: ReviewSchemaType) => {
-    const res = await fetch("http://localhost:3000/api/review", {
+    // https://${process.env.VERCEL_URL/api/review}
+    // http://localhost:3000/api/review
+    const res = await fetch(`http://localhost:3000/api/review`, {
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
       body: JSON.stringify({ data, productId }),
     });
-    console.log(res);
+
+    // TODO: Message if failed
+    if (res.status === 200) closeDialog();
   };
 
   return (
@@ -74,7 +78,7 @@ const WriteReviewDialog = ({ productId }: Props) => {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem className="@sm:col-span-2">
+                <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your name" {...field} />
@@ -87,7 +91,7 @@ const WriteReviewDialog = ({ productId }: Props) => {
               control={form.control}
               name="rating"
               render={({ field }) => (
-                <FormItem className="@sm:col-span-2">
+                <FormItem>
                   <FormLabel>Rating between 0 to 5</FormLabel>
                   <FormControl>
                     <Input
@@ -106,7 +110,7 @@ const WriteReviewDialog = ({ productId }: Props) => {
               control={form.control}
               name="description"
               render={({ field }) => (
-                <FormItem className="@sm:col-span-2">
+                <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Textarea

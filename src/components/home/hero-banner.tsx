@@ -8,8 +8,11 @@ const HeroBanner = () => {
         <h1 className="text-2xl font-bold text-white md:text-5xl">
           Collection is here
         </h1>
-        <p className="text-white md:text-xl">
-          TODO: Find better image and catchphrase
+        <p className="font-semibold text-white md:text-lg">
+          "Food, in the end, in our own tradition, is something holy. It's not
+          about nutrients and calories. It's about sharing. It's about honesty.
+          It's about identity."
+          <br /> - Louise Fresco
         </p>
         <Button variant="white" asChild size="lg">
           <Link href="/shop">Start Shopping</Link>

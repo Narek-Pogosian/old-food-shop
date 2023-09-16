@@ -22,6 +22,7 @@ export async function POST(request: Request) {
         ...validData,
       },
     });
+
     return NextResponse.json({ message: "Review created" }, { status: 200 });
   } catch (error) {
     if (error instanceof ZodError) {

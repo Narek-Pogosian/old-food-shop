@@ -39,7 +39,13 @@ const SortingSelect = ({ initalValue }: Props) => {
         <SelectTrigger className="xs:w-[180px]">
           <SelectValue placeholder="Sort by" className="capitalize" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          // Fixes bubbling issue on mobile device
+          ref={(ref) => {
+            if (!ref) return;
+            ref.ontouchstart = (e) => e.preventDefault();
+          }}
+        >
           <SelectGroup>
             {sortOptions.map((option) => (
               <SelectItem
