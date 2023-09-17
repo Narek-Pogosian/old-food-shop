@@ -1,11 +1,11 @@
 import AddToCartCounter from "@/components/details/add-to-cart-counter";
 import ProductInfo from "@/components/details/product-info";
 import PageTitle from "@/components/page-title";
-import Image from "next/image";
-import { db } from "@/lib/db";
-import { Suspense } from "react";
 import ReviewsSection from "@/components/details/reviews/reviews-section";
+import Image from "next/image";
 import { ErrorBoundary } from "react-error-boundary";
+import { Suspense } from "react";
+import { db } from "@/lib/db";
 
 export async function generateStaticParams() {
   const products = await db.product.findMany({ select: { id: true } });
@@ -28,6 +28,7 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
     <div className="container">
       <PageTitle>Product Details</PageTitle>
 
+      {/* Product Info */}
       <section className="grid gap-10 lg:grid-cols-2">
         <div className="lg:order-2">
           <ProductInfo product={product} />
@@ -45,6 +46,7 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
         </div>
       </section>
 
+      {/* Reviews */}
       <section className="pt-16">
         <h2 className="mb-12 text-3xl font-semibold text-center">
           Our Customers Opinion

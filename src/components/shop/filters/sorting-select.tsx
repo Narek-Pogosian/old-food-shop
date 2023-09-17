@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { SortOptionValue, sortOptions } from "@/lib/data/sorting-options";
-import { setSortQuery } from "@/lib/utils";
+import { setSortQuery } from "@/lib/helpers/searchparams";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -29,7 +29,7 @@ const SortingSelect = ({ initalValue }: Props) => {
 
   return (
     <div className="space-y-1">
-      <Label>Sort Options</Label>
+      <Label>Sort by</Label>
       <Select
         defaultValue={defaultValue}
         onValueChange={(value) => {

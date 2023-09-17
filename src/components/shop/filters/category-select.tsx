@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { categoryOptions } from "@/lib/data/category-options";
-import { setCategoryQuery } from "@/lib/utils";
+import { setCategoryQuery } from "@/lib/helpers/searchparams";
 import { Category } from "@prisma/client";
 import { useRouter } from "next/navigation";
 

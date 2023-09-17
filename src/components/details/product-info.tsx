@@ -1,4 +1,4 @@
-import { currency } from "@/lib/utils";
+import { currency } from "@/lib/helpers/currency";
 import { Product } from "@prisma/client";
 
 type Props = {

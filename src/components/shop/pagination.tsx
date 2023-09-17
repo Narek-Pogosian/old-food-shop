@@ -1,6 +1,6 @@
 "use client";
 
-import { nextPage, previousPage } from "@/lib/utils";
+import { nextPage, previousPage } from "@/lib/helpers/searchparams";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 

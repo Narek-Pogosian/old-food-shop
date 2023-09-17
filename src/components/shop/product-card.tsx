@@ -1,8 +1,8 @@
 import { Product } from "@prisma/client";
-import { currency } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import AddToCart from "./add-to-cart";
+import { currency } from "@/lib/helpers/currency";
 
 type Props = {
   product: Product;

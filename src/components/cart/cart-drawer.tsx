@@ -12,16 +12,27 @@ import { ShoppingCart } from "lucide-react";
 import useCartContext from "@/hooks/use-cart-context";
 import CartQuantityBadge from "./cart-quantity-badge";
 import { ScrollArea } from "../ui/scroll-area";
-import { getTotalPrice } from "@/lib/utils";
 import CartItemCard from "./cart-item";
 import useIsMounted from "@/hooks/use-is-mounted";
+import { getTotalPrice } from "@/lib/helpers/currency";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const CartDrawer = () => {
-  const isMounted = useIsMounted();
+  const [isOpen, setIsOpen] = useState(false);
+
   const { cartItems } = useCartContext();
+  const isMounted = useIsMounted();
+  const router = useRouter();
+
+  const navigateToCheckout = () => {
+    setIsOpen(false);
+    router.push("/checkout");
+  };
 
   return (
-    <Sheet>
+    <Sheet onOpenChange={setIsOpen} open={isOpen}>
       <SheetTrigger asChild>
         <Button size="icon" variant="ghost" className="relative">
           <span className="sr-only">Open shopping cart</span>
@@ -48,7 +59,11 @@ const CartDrawer = () => {
           <p className="mb-4 text-lg font-semibold">
             Total Price: {getTotalPrice(cartItems)}
           </p>
-          <Button className="w-full text-base font-semibold tracking-wider">
+          <Button
+            className="w-full text-base font-semibold tracking-wider"
+            disabled={cartItems.length === 0}
+            onClick={navigateToCheckout}
+          >
             Checkout
           </Button>
         </div>

@@ -2,11 +2,11 @@
 
 import { CartItem } from "@/context/cart-context/cart-types";
 import useCartContext from "@/hooks/use-cart-context";
-import { currency } from "@/lib/utils";
 import { TrashIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { currency } from "@/lib/helpers/currency";
 
 type Props = {
   cartItem: CartItem;
