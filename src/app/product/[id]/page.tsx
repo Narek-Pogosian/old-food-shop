@@ -13,7 +13,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export const revalidate = 10;
+export const revalidate = 10000;
 
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
   const product = await db.product.findFirst({

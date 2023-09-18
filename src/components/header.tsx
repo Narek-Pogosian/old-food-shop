@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { ShoppingCart } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 import CartDrawer from "./cart/cart-drawer";
 
