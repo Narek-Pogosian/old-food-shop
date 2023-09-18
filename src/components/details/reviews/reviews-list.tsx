@@ -18,7 +18,7 @@ const ReviewList = ({ reviews }: Props) => {
             <div className="flex items-end gap-4">
               <span className="font-semibold">{review.name}</span>
               <span className="text-sm text-muted-foreground">
-                {review.created_at.toLocaleDateString()}
+                {review.created_at.toString().split("T")[0]}
               </span>
             </div>
             <span className="mb-2">

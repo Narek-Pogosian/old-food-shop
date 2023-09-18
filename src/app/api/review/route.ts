@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { reviewSchema } from "@/lib/validations/review-validation";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       },
     });
 
-    revalidatePath(`/product/${productId}`);
+    revalidateTag(productId);
     return NextResponse.json({ message: "Review created" }, { status: 200 });
   } catch (error) {
     if (error instanceof ZodError) {

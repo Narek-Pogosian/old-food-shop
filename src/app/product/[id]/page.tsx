@@ -57,15 +57,7 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
             </h2>
           }
         >
-          {/* <Suspense
-            fallback={
-              <p className="text-xl font-semibold text-center">
-                Loading reviews...
-              </p>
-            }
-          > */}
           <ReviewsSection product={product} />
-          {/* </Suspense> */}
         </ErrorBoundary>
       </section>
     </div>

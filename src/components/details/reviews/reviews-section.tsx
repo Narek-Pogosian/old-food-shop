@@ -1,6 +1,5 @@
 import WriteReviewDialog from "@/components/details/reviews/write-review-dialog";
-import { db } from "@/lib/db";
-import { Product } from "@prisma/client";
+import { Product, Review } from "@prisma/client";
 import ReviewList from "./reviews-list";
 import ReviewsData from "./reviews-data";
 
@@ -9,9 +8,19 @@ type Props = {
 };
 
 const ReviewsSection = async ({ product }: Props) => {
-  const reviews = await db.review.findMany({
-    where: { productId: product.id },
-  });
+  // const reviews = await db.review.findMany({
+  //   where: { productId: product.id },
+  // });
+
+  // https://food-shop-roan.vercel.app/api/review
+  const res = await fetch(
+    `https://food-shop-roan.vercel.app/api/review/${product.id}`,
+    {
+      next: { tags: [product.id] },
+    }
+  );
+  const reviews: Review[] = await res.json();
+  console.log(reviews);
 
   return (
     <>
