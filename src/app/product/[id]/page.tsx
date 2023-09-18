@@ -3,7 +3,6 @@ import ProductInfo from "@/components/details/product-info";
 import PageTitle from "@/components/page-title";
 import ReviewsSection from "@/components/details/reviews/reviews-section";
 import Image from "next/image";
-import { ErrorBoundary } from "react-error-boundary";
 import { db } from "@/lib/db";
 
 export async function generateStaticParams() {
@@ -14,9 +13,12 @@ export async function generateStaticParams() {
   }));
 }
 
+export const revalidate = 10;
+
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
   const product = await db.product.findFirst({
     where: { id: params.id },
+    include: { reviews: true },
   });
 
   if (!product) {
@@ -50,15 +52,8 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
         <h2 className="mb-12 text-3xl font-semibold text-center">
           Our Customers Opinion
         </h2>
-        <ErrorBoundary
-          fallback={
-            <h2 className="text-2xl font-bold text-center">
-              Error, could not get reviews
-            </h2>
-          }
-        >
-          <ReviewsSection product={product} />
-        </ErrorBoundary>
+
+        <ReviewsSection productId={product.id} reviews={product.reviews} />
       </section>
     </div>
   );
