@@ -25,6 +25,7 @@ import {
 import { Input } from "../../ui/input";
 import { Textarea } from "../../ui/textarea";
 import { useState } from "react";
+import { url } from "@/lib/data/api-url";
 
 type Props = {
   productId: string;
@@ -38,6 +39,7 @@ const initialData: ReviewSchemaType = {
 
 const WriteReviewDialog = ({ productId }: Props) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
   const closeDialog = () => {
     setIsDialogOpen(false);
@@ -48,19 +50,16 @@ const WriteReviewDialog = ({ productId }: Props) => {
     defaultValues: initialData,
   });
 
-  const onSubmit = async (data: ReviewSchemaType) => {
-    // https://${process.env.VERCEL_URL/api/review}
-    // http://localhost:3000/api/review
-    const res = await fetch(`http://localhost:3000/api/review`, {
+  const onSubmit = (data: ReviewSchemaType) => {
+    fetch(`${url}/api/review`, {
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
       body: JSON.stringify({ data, productId }),
-    });
-
-    // TODO: Message if failed
-    if (res.status === 200) closeDialog();
+    })
+      .then(() => closeDialog())
+      .catch(() => setMessage("Sorry, something went wrong"));
   };
 
   return (
@@ -111,7 +110,7 @@ const WriteReviewDialog = ({ productId }: Props) => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Description (optional)</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Please share your thought on this product"
@@ -124,6 +123,11 @@ const WriteReviewDialog = ({ productId }: Props) => {
                 </FormItem>
               )}
             />
+            {message && (
+              <div className="p-3 border rounded">
+                <p>{message}</p>
+              </div>
+            )}
             <div className="flex justify-end gap-4">
               <Button type="button" variant="destructive" onClick={closeDialog}>
                 Cancel

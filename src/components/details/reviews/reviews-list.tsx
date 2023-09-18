@@ -14,7 +14,7 @@ const ReviewList = ({ reviews }: Props) => {
         </div>
       ) : (
         reviews.map((review) => (
-          <li key={review.id} className="flex flex-col pb-6 border-b">
+          <li key={review.id} className="flex flex-col pb-4 border-b">
             <div className="flex items-end gap-4">
               <span className="font-semibold">{review.name}</span>
               <span className="text-sm text-muted-foreground">
