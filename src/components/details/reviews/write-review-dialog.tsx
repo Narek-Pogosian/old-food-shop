@@ -33,7 +33,7 @@ type Props = {
 
 const initialData: ReviewSchemaType = {
   name: "",
-  rating: 5,
+  rating: 0,
   description: "",
 };
 
@@ -51,14 +51,17 @@ const WriteReviewDialog = ({ productId }: Props) => {
   });
 
   const onSubmit = (data: ReviewSchemaType) => {
-    fetch(`${url}/api/review`, {
+    fetch(`https://food-shop-roan.vercel.app/api/review`, {
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
       body: JSON.stringify({ data, productId }),
     })
-      .then(() => closeDialog())
+      .then(() => {
+        closeDialog();
+        form.reset();
+      })
       .catch(() => setMessage("Sorry, something went wrong"));
   };
 

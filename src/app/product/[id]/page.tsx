@@ -4,7 +4,6 @@ import PageTitle from "@/components/page-title";
 import ReviewsSection from "@/components/details/reviews/reviews-section";
 import Image from "next/image";
 import { ErrorBoundary } from "react-error-boundary";
-import { Suspense } from "react";
 import { db } from "@/lib/db";
 
 export async function generateStaticParams() {
@@ -58,15 +57,15 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
             </h2>
           }
         >
-          <Suspense
+          {/* <Suspense
             fallback={
               <p className="text-xl font-semibold text-center">
                 Loading reviews...
               </p>
             }
-          >
-            <ReviewsSection product={product} />
-          </Suspense>
+          > */}
+          <ReviewsSection product={product} />
+          {/* </Suspense> */}
         </ErrorBoundary>
       </section>
     </div>

@@ -8,8 +8,6 @@ type Props = {
   product: Product;
 };
 
-export const dynamic = "force-dynamic";
-
 const ReviewsSection = async ({ product }: Props) => {
   const reviews = await db.review.findMany({
     where: { productId: product.id },
