@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import { CartContextProvider } from "@/context/cart-context/cart-context";
 
 const noto_sans = Noto_Sans({
@@ -27,6 +28,7 @@ export default function RootLayout({
           <CartContextProvider>
             <Header />
             <main className="pb-16">{children}</main>
+            <Toaster />
           </CartContextProvider>
         </ThemeProvider>
       </body>

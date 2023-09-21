@@ -25,7 +25,8 @@ import {
 import { Input } from "../../ui/input";
 import { Textarea } from "../../ui/textarea";
 import { useState } from "react";
-import { url } from "@/lib/data/api-url";
+import { getBaseUrl } from "@/lib/utils";
+import { useToast } from "@/components/ui/use-toast";
 
 type Props = {
   productId: string;
@@ -39,7 +40,7 @@ const initialData: ReviewSchemaType = {
 
 const WriteReviewDialog = ({ productId }: Props) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const { toast } = useToast();
 
   const closeDialog = () => {
     setIsDialogOpen(false);
@@ -49,9 +50,9 @@ const WriteReviewDialog = ({ productId }: Props) => {
     resolver: zodResolver(reviewSchema),
     defaultValues: initialData,
   });
-
+  // TODO: Add better feedback, maybe use toasts
   const onSubmit = (data: ReviewSchemaType) => {
-    fetch(`https://food-shop-roan.vercel.app/api/review`, {
+    fetch(`${getBaseUrl()}/api/review`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -59,10 +60,22 @@ const WriteReviewDialog = ({ productId }: Props) => {
       body: JSON.stringify({ data, productId }),
     })
       .then(() => {
+        toast({
+          title: "Review created",
+          description: "Thank you for your feedback",
+        });
+      })
+      .catch(() =>
+        toast({
+          title: "Error",
+          description: "Sorry, your feedback could not be created",
+          variant: "destructive",
+        })
+      )
+      .finally(() => {
         closeDialog();
         form.reset();
-      })
-      .catch(() => setMessage("Sorry, something went wrong"));
+      });
   };
 
   return (
@@ -126,11 +139,6 @@ const WriteReviewDialog = ({ productId }: Props) => {
                 </FormItem>
               )}
             />
-            {message && (
-              <div className="p-3 border rounded">
-                <p>{message}</p>
-              </div>
-            )}
             <div className="flex justify-end gap-4">
               <Button type="button" variant="destructive" onClick={closeDialog}>
                 Cancel

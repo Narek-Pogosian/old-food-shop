@@ -4,6 +4,7 @@ import useCartContext from "@/hooks/use-cart-context";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Product } from "@prisma/client";
+import { toast } from "../ui/use-toast";
 
 type Props = {
   product: Product;
@@ -28,6 +29,7 @@ const AddToCartCounter = ({ product }: Props) => {
 
   const handleAdd = () => {
     addToCart({ product: product, productId: product.id, quantity: count });
+    toast({ description: `${count} ${product.name} added to cart` });
     setCount(1);
   };
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
 import CartDrawer from "./cart/cart-drawer";
+import SearchDialog from "./searchbox/search-dialog";
 
 const Header = () => {
   return (
@@ -18,6 +19,7 @@ const Header = () => {
           </nav>
         </div>
         <div className="flex gap-1 md:gap-2">
+          <SearchDialog />
           <ModeToggle />
           <CartDrawer />
         </div>
