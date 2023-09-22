@@ -59,6 +59,7 @@ const Searchbox = ({ setIsOpen }: Props) => {
                 className="h-fit"
                 aria-label={`Navigate to ${product.name}`}
                 onClick={() => handleNavigation(product.id)}
+                key={product.id}
               >
                 <SearchProductItem product={product} />
               </button>
