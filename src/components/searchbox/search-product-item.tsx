@@ -8,7 +8,7 @@ type Props = {
 
 const SearchProductItem = ({ product }: Props) => {
   return (
-    <li key={product.id} className="flex gap-6 p-2 rounded hover:bg-accent">
+    <li key={product.id} className="flex gap-3 p-2 rounded hover:bg-accent">
       <Image
         src={product.imgUrl}
         alt={`Image of ${product.name}`}
@@ -16,9 +16,11 @@ const SearchProductItem = ({ product }: Props) => {
         height={40}
         className="rounded"
       />
-      <div>
-        <p>{product.name}</p>
-        <p>{currency(product.price)}</p>
+      <div className="text-left">
+        <p className="font-semibold">{product.name}</p>
+        <p className="text-sm text-muted-foreground">
+          {currency(product.price)}
+        </p>
       </div>
     </li>
   );

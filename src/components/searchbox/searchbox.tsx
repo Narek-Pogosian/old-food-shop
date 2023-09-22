@@ -1,36 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import SearchProductItem from "./search-product-item";
+import { useState } from "react";
 import { Input } from "../ui/input";
-import { useDebounce } from "@/hooks/use-debounce";
 import { Product } from "@prisma/client";
 import { getBaseUrl } from "@/lib/utils";
 import { ScrollArea } from "../ui/scroll-area";
 import { useRouter } from "next/navigation";
-import SearchProductItem from "./search-product-item";
+import { Button } from "../ui/button";
+import { Loader } from "lucide-react";
 
 type Props = {
   setIsOpen: (val: boolean) => void;
 };
 
+// TODO: Maybe use a combobox instead, fix the ternary operators mess
 const Searchbox = ({ setIsOpen }: Props) => {
   const router = useRouter();
-  const [results, setResults] = useState<Product[]>([]);
-  const [query, setQuery] = useState("");
+
   const [isFetching, setIsFetching] = useState(false);
-  const debouncedQuery = useDebounce(query, 300);
+  const [error, setError] = useState("");
+  const [results, setResults] = useState<Product[] | null>(null);
+  const [query, setQuery] = useState("");
 
-  // ! Probably change to search with form and onSubmit
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  useEffect(() => {
-    if (debouncedQuery.trim()) {
+    if (query.trim()) {
       setIsFetching(true);
-      fetch(`${getBaseUrl()}/api/search?q=${debouncedQuery}`)
+      fetch(`${getBaseUrl()}/api/search?q=${query}`)
         .then((res) => res.json())
         .then(setResults)
+        .catch(() => setError("Something went wrong"))
         .finally(() => setIsFetching(false));
     }
-  }, [debouncedQuery]);
+  };
 
   const handleNavigation = (id: string) => {
     router.push(`/product/${id}`);
@@ -39,21 +43,36 @@ const Searchbox = ({ setIsOpen }: Props) => {
 
   return (
     <>
-      <Input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        id="search"
-        placeholder="Search by name..."
-        autoComplete="off"
-      />
+      <form onSubmit={handleSubmit} className="flex gap-2">
+        <Input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          id="search"
+          placeholder="Search by name..."
+          autoComplete="off"
+        />
+        <Button className="h-auto font-semibold" disabled={isFetching}>
+          {isFetching ? (
+            <span className="flex items-center">
+              <Loader className="w-4 h-4 mr-2 animate-spin" /> Searching
+            </span>
+          ) : (
+            "Search"
+          )}
+        </Button>
+      </form>
 
-      <div className="h-6 my-2">
-        {isFetching && <p className="font-semibold text-center">Fetching...</p>}
-      </div>
-
-      {!!results.length && (
-        <ScrollArea className="relative @container" type="always">
-          <ul className="h-[350px] grid @sm:grid-cols-2 gap-4 px-3 py-1">
+      {error ? (
+        <p className="text-lg font-semibold text-center pt-14 text-muted-foreground">
+          {error}
+        </p>
+      ) : !results ? (
+        <p className="text-lg font-semibold text-center pt-14 text-muted-foreground">
+          Search something
+        </p>
+      ) : !!results.length ? (
+        <ScrollArea className="relative mt-4" type="always">
+          <ul className="h-[370px] flex flex-col gap-4 px-3">
             {results.map((product) => (
               <button
                 className="h-fit"
@@ -66,13 +85,10 @@ const Searchbox = ({ setIsOpen }: Props) => {
             ))}
           </ul>
         </ScrollArea>
-      )}
-
-      {!query.trim() && !isFetching ? (
-        <p className="text-center">Enter a query</p>
       ) : (
-        query.trim() &&
-        !results.length && <p className="text-center">No results found</p>
+        <p className="text-lg font-semibold text-center pt-14 text-muted-foreground">
+          Nothing found
+        </p>
       )}
     </>
   );
