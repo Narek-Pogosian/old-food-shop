@@ -29,7 +29,9 @@ const AddToCartCounter = ({ product }: Props) => {
 
   const handleAdd = () => {
     addToCart({ product: product, productId: product.id, quantity: count });
-    toast({ description: `${count} ${product.name} added to cart` });
+    toast({
+      description: `${count > 1 ? count : ""} ${product.name} added to cart`,
+    });
     setCount(1);
   };
 

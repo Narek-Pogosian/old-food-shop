@@ -57,7 +57,10 @@ const ReviewsData = ({ reviews }: Props) => {
                 }
               />
               <span className="w-6 text-sm tracking-wider text-muted-foreground">
-                {reviews.length ? (ratings[key]! / reviews.length) * 100 : 0}%
+                {reviews.length
+                  ? Math.round((ratings[key]! / reviews.length) * 100)
+                  : 0}
+                %
               </span>
             </div>
           ))}

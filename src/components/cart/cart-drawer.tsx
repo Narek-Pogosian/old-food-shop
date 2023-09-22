@@ -43,7 +43,7 @@ const CartDrawer = () => {
           )}
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col h-full pr-0">
+      <SheetContent className="flex flex-col h-full pr-0 z-[100]">
         <ScrollArea className="relative flex-1 px-1 py-0">
           <SheetHeader>
             <SheetTitle>Shopping Cart</SheetTitle>

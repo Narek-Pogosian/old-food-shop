@@ -50,8 +50,13 @@ const WriteReviewDialog = ({ productId }: Props) => {
     resolver: zodResolver(reviewSchema),
     defaultValues: initialData,
   });
-  // TODO: Add better feedback, maybe use toasts
+
   const onSubmit = (data: ReviewSchemaType) => {
+    closeDialog();
+    toast({
+      description: "Your review is being processed.",
+    });
+
     fetch(`${getBaseUrl()}/api/review`, {
       headers: {
         "Content-Type": "application/json",
@@ -139,6 +144,9 @@ const WriteReviewDialog = ({ productId }: Props) => {
                 </FormItem>
               )}
             />
+            <p className="text-sm text-muted-foreground">
+              *Notice, it can take a few hours before your review is shown.
+            </p>
             <div className="flex justify-end gap-4">
               <Button type="button" variant="destructive" onClick={closeDialog}>
                 Cancel
