@@ -16,6 +16,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const CheckoutForm = () => {
   const form = useForm<CheckoutSchemaType>({
@@ -50,7 +51,11 @@ const CheckoutForm = () => {
               <FormItem className="col-span-6 @lg:col-span-3">
                 <FormLabel>First name</FormLabel>
                 <FormControl>
-                  <Input placeholder="First name" {...field} />
+                  <Input
+                    placeholder="First name"
+                    {...field}
+                    autoComplete="given-name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -63,7 +68,11 @@ const CheckoutForm = () => {
               <FormItem className="col-span-6 @lg:col-span-3">
                 <FormLabel>Last name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Last name" {...field} />
+                  <Input
+                    placeholder="Last name"
+                    {...field}
+                    autoComplete="family-name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -89,7 +98,11 @@ const CheckoutForm = () => {
               <FormItem className="col-span-6 @lg:col-span-3">
                 <FormLabel>Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="Address" {...field} />
+                  <Input
+                    placeholder="Address"
+                    {...field}
+                    autoComplete="street-address"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -115,7 +128,11 @@ const CheckoutForm = () => {
               <FormItem className="col-span-6 @lg:col-span-3">
                 <FormLabel>ZIP code</FormLabel>
                 <FormControl>
-                  <Input placeholder="123 45" {...field} />
+                  <Input
+                    placeholder="123 45"
+                    {...field}
+                    autoComplete="postal-code"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -128,7 +145,11 @@ const CheckoutForm = () => {
               <FormItem className="col-span-6 @lg:col-span-3">
                 <FormLabel>Card number</FormLabel>
                 <FormControl>
-                  <Input placeholder="1234 5678 1234 5678" {...field} />
+                  <Input
+                    placeholder="1234 5678 1234 5678"
+                    {...field}
+                    autoComplete="cc-number"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -141,7 +162,11 @@ const CheckoutForm = () => {
               <FormItem className="col-span-2 @lg:col-span-1">
                 <FormLabel>Exp month</FormLabel>
                 <FormControl>
-                  <Input placeholder="01" {...field} />
+                  <Input
+                    placeholder="01"
+                    {...field}
+                    autoComplete="cc-exp-month"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -154,7 +179,11 @@ const CheckoutForm = () => {
               <FormItem className="col-span-2 @lg:col-span-1">
                 <FormLabel>Exp year</FormLabel>
                 <FormControl>
-                  <Input placeholder="23" {...field} />
+                  <Input
+                    placeholder="23"
+                    {...field}
+                    autoComplete="cc-exp-year"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -167,13 +196,20 @@ const CheckoutForm = () => {
               <FormItem className="col-span-2 @lg:col-span-1">
                 <FormLabel>CVC code</FormLabel>
                 <FormControl>
-                  <Input placeholder="123" {...field} />
+                  <Input placeholder="123" {...field} autoComplete="cc-csc" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <div className="flex justify-end col-span-6 gap-4">
+            <Button asChild variant="destructive">
+              <Link href="/shop">Cancel</Link>
+            </Button>
+            <Button type="submit" className="px-10 font-semibold">
+              Order
+            </Button>
+          </div>
         </form>
       </div>
     </Form>

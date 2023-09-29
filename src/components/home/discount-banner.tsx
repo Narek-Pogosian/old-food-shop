@@ -3,13 +3,13 @@ import { Button } from "../ui/button";
 
 const DiscountBanner = () => {
   return (
-    <div className="bg-[url('/discount.webp')] bg-cover rounded-t bg-center h-[500px]">
+    <section className="bg-[url('/discount.webp')] bg-cover rounded-t bg-center h-[500px]">
       <div className="grid h-full place-content-center bg-gradient-to-b from-transparent dark:from-black/40 dark:to-background to-background">
         <div className="max-w-4xl px-4 space-y-8 text-center">
           <h2 className="text-2xl font-bold md:text-5xl">
             Exclusive Discounts for Members
           </h2>
-          <p className="md:text-lg text-muted-foreground">
+          <p className="font-semibold md:text-lg">
             The time is now for it to be okay to be great. People in this world
             shun people for being great. For being a bright color. For standing
             out. But the time is now to be okay to be the greatest you.
@@ -20,7 +20,7 @@ const DiscountBanner = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

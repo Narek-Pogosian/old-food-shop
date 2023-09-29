@@ -14,7 +14,7 @@ const Checkout = () => {
   return (
     <div className="container">
       <PageTitle>Checkout</PageTitle>
-      <div className="flex flex-col gap-8 lg:gap-20 lg:flex lg:flex-row-reverse">
+      <div className="flex flex-col gap-8 lg:gap-32 lg:flex lg:flex-row-reverse">
         <div className="min-w-[288px]">
           {isMounted && (
             <>

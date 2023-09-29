@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Categories = () => {
   return (
-    <div>
-      <h2 className="mb-10 text-2xl font-semibold text-center md:text-4xl">
+    <section>
+      <h2 className="mb-10 text-xl font-semibold text-center md:text-3xl">
         Shop by category
       </h2>
       <nav className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -28,7 +28,7 @@ const Categories = () => {
           </Link>
         ))}
       </nav>
-    </div>
+    </section>
   );
 };
 
