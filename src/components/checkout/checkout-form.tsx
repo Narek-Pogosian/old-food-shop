@@ -42,7 +42,7 @@ const CheckoutForm = () => {
       <div className="@container">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid grid-cols-6 gap-4 @lg:gap-6"
+          className="grid grid-cols-6 gap-x-4 gap-y-6 @lg:gap-6"
         >
           <FormField
             control={form.control}

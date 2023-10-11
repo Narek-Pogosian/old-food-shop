@@ -8,7 +8,7 @@ type Props = {
   reviews: Review[];
 };
 
-const ReviewsSection = async ({ productId, reviews }: Props) => {
+const ReviewsSection = ({ productId, reviews }: Props) => {
   return (
     <>
       <h3 className="mb-4 text-2xl font-semibold">Client Reviews</h3>

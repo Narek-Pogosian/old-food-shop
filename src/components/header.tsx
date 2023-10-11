@@ -6,7 +6,7 @@ import SearchDialog from "./searchbox/search-dialog";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 left-0 z-50 shadow-lg bg-card">
+    <header className="sticky top-0 left-0 z-50 shadow-md bg-card">
       <div className="container flex items-center justify-between h-16">
         <div className="flex items-center gap-2 md:gap-8">
           <Link href="/" className="font-bold tracking-wider uppercase">
