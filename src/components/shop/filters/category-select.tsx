@@ -23,14 +23,16 @@ const CategorySelect = ({ initalValue }: Props) => {
 
   return (
     <div className="space-y-1">
-      <Label>Category</Label>
+      <div aria-hidden className="mb-1 text-sm font-semibold">
+        Category
+      </div>
       <Select
         defaultValue={initalValue}
         onValueChange={(value: Category) => {
           router.push(setCategoryQuery(value));
         }}
       >
-        <SelectTrigger className="xs:w-[180px]">
+        <SelectTrigger className="xs:w-[180px]" aria-label="Filter by category">
           <SelectValue
             placeholder="Filter by category"
             className="capitalize"

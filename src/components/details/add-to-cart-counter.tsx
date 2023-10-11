@@ -43,17 +43,25 @@ const AddToCartCounter = ({ product }: Props) => {
           variant="ghost"
           size="icon"
           className="text-2xl"
+          aria-label="decrement"
         >
           -
         </Button>
-        <span className="inline-flex items-center justify-center w-10 text-lg text-primary ">
+        <div
+          id="announcer"
+          role="region"
+          aria-live="assertive"
+          className="inline-flex items-center justify-center w-10 text-lg text-primary "
+        >
+          <span className="sr-only">Current count is</span>
           {count}
-        </span>
+        </div>
         <Button
           variant="ghost"
           size="icon"
           onClick={increment}
           className="text-2xl"
+          aria-label="increment"
         >
           +
         </Button>

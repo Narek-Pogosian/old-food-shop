@@ -20,6 +20,7 @@ const AddToCart = ({ product }: Props) => {
 
   return (
     <Button size="icon" onClick={handleAdd}>
+      <span className="sr-only">Add to cart</span>
       <ShoppingCart className="w-5 h-5" strokeWidth={2} />
     </Button>
   );

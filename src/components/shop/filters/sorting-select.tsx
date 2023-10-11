@@ -29,14 +29,16 @@ const SortingSelect = ({ initalValue }: Props) => {
 
   return (
     <div className="space-y-1">
-      <Label>Sort by</Label>
+      <div aria-hidden className="mb-1 text-sm font-semibold">
+        Sort by
+      </div>
       <Select
         defaultValue={defaultValue}
         onValueChange={(value) => {
           router.push(setSortQuery(value ? JSON.parse(value) : ""));
         }}
       >
-        <SelectTrigger className="xs:w-[180px]">
+        <SelectTrigger className="xs:w-[180px]" aria-label="Sorting options">
           <SelectValue placeholder="Sort by" className="capitalize" />
         </SelectTrigger>
         <SelectContent

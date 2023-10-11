@@ -17,7 +17,7 @@ const HeroBanner = () => {
           about honesty. It&#39;s about identity.
           <footer className="mt-2">- Louise Fresco</footer>
         </blockquote>
-        <Button variant="white" asChild size="lg" className="text-lg font-bold">
+        <Button asChild size="lg" className="text-lg font-bold">
           <Link href="/shop">Start Shopping</Link>
         </Button>
       </div>
