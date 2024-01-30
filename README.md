@@ -3,9 +3,6 @@
 ## Tech stack
 Next.js (app router), Prisma, Tailwind CSS with shadcn/ui, Zod
 
-## View Website
-<a href="https://food-shop-roan.vercel.app/" target="_blank" >View here</a>
-
 ## Includes
 1. Landing page
 2. Products list page with categories filter and sort by option
